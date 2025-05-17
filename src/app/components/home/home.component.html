@@ -1,0 +1,36 @@
+<div class="home-container">
+  <!-- Welcome Heading -->
+  <h2 class="welcome-heading">
+    👋 Hello, {{ userFullName }}
+  </h2>
+
+  <!-- Insights Section -->
+  <div class="insights">
+    <div class="insight-card">
+      <h3>Total Messages</h3>
+      <p>{{ totalMessages }}</p>
+    </div>
+    <div class="insight-card">
+      <h3>AI Responses</h3>
+      <p>{{ aiMessages }}</p>
+    </div>
+  </div>
+
+  <!-- Bots Grid -->
+  <div class="bots-section">
+    <h3>Your Bots</h3>
+    <div class="bot-grid">
+      <div class="bot-card" *ngFor="let bot of bots">
+        <div class="bot-info">
+          <h4>{{ bot.name }}</h4>
+          <p>Created: {{ bot.createdAt | date:'short' }}</p>
+          <p>Modified: {{ bot.updatedAt | date:'short' }}</p>
+        </div>
+        <div class="bot-actions">
+          <button (click)="editBot(bot)">Edit</button>
+          <button (click)="deleteBot(bot)">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

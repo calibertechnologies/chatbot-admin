@@ -1,0 +1,33 @@
+<div class="organizations-container">
+  <h2>Manage Organizations</h2>
+
+  <div class="org-form">
+    <input type="text" [(ngModel)]="newOrg.name" placeholder="Organization Name" />
+    <input type="email" [(ngModel)]="newOrg.email" placeholder="Admin Email" />
+    <select [(ngModel)]="newOrg.type">
+      <option value="calimatic">Calimatic</option>
+      <option value="client">Client</option>
+      <option value="partner">Partner</option>
+    </select>
+    <button (click)="createOrg()">Create Organization</button>
+  </div>
+
+  <table class="org-list">
+    <thead>
+      <tr>
+        <th>Org ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Type</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let org of organizations">
+        <td>{{ org.id }}</td>
+        <td>{{ org.name }}</td>
+        <td>{{ org.email }}</td>
+        <td>{{ org.type }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

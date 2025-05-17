@@ -1,0 +1,83 @@
+<div class="bots-container">
+  <h2>Manage Bots</h2>
+
+  <button class="create-btn" (click)="startCreating()">+ New Bot</button>
+
+  <div *ngIf="creatingBot" class="bot-form">
+    <h3>{{ editingBot ? 'Edit Bot' : 'Create New Bot' }}</h3>
+
+    <form (ngSubmit)="saveBot()">
+      <label>Bot Name:</label>
+      <input [(ngModel)]="botForm.name" name="name" required />
+
+      <label>Description:</label>
+      <textarea [(ngModel)]="botForm.description" name="description"></textarea>
+
+      <label>Knowledge Source:</label>
+      <div>
+        <label>
+          <input type="radio" [(ngModel)]="botForm.knowledgeSourceType" name="source" value="documents" /> Documents
+        </label>
+        <label>
+          <input type="radio" [(ngModel)]="botForm.knowledgeSourceType" name="source" value="url" /> Website URL
+        </label>
+      </div>
+
+      <div *ngIf="botForm.knowledgeSourceType === 'documents'">
+        <label>Upload Documents:</label>
+        <input type="file" multiple (change)="handleFileUpload($event)" />
+      </div>
+
+      <div *ngIf="botForm.knowledgeSourceType === 'url'">
+        <label>Website URLs:</label>
+        <input [(ngModel)]="newUrl" name="newUrl" placeholder="https://..." />
+        <button type="button" (click)="addUrl()">Add URL</button>
+        <ul>
+          <li *ngFor="let url of botForm.websiteUrls">{{ url }}</li>
+        </ul>
+      </div>
+
+      <h4>Customize Appearance</h4>
+      <label>Primary Color:</label>
+      <input [(ngModel)]="botForm.primaryColor" name="primaryColor" type="color" />
+
+      <label>Background Color:</label>
+      <input [(ngModel)]="botForm.backgroundColor" name="backgroundColor" type="color" />
+
+      <label>Font Family:</label>
+      <input [(ngModel)]="botForm.fontFamily" name="fontFamily" />
+
+      <label>Widget Position:</label>
+      <select [(ngModel)]="botForm.widgetPosition" name="widgetPosition">
+        <option value="bottom-right">Bottom Right</option>
+        <option value="bottom-left">Bottom Left</option>
+      </select>
+
+      <label>Avatar URL:</label>
+      <input [(ngModel)]="botForm.avatarUrl" name="avatarUrl" />
+
+      <label>Welcome Message:</label>
+      <textarea [(ngModel)]="botForm.welcomeMessage" name="welcomeMessage"></textarea>
+
+      <button type="submit">Save</button>
+      <button type="button" (click)="cancel()">Cancel</button>
+    </form>
+  </div>
+
+  <div *ngIf="!creatingBot">
+    <div class="bot-list">
+      <div *ngFor="let bot of bots" class="bot-card">
+        <h4>{{ bot.name }}</h4>
+        <p>{{ bot.description }}</p>
+        <p><strong>Source:</strong> {{ bot.knowledgeSourceType }}</p>
+        <p><strong>Last Modified:</strong> {{ bot.updatedAt | date:'short' }}</p>
+        <div class="actions">
+          <button (click)="edit(bot)">Edit</button>
+          <button (click)="delete(bot)">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+</div>

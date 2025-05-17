@@ -1,0 +1,64 @@
+/* chatbot-admin/src/app/components/organizations/organizations.component.css */
+.organizations-container {
+  font-family: 'DM Sans', sans-serif;
+  padding: 2rem;
+  background-color: #f8fafc;
+}
+
+h2 {
+  margin-bottom: 1rem;
+}
+
+.org-form {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.org-form input,
+.org-form select {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  width: 200px;
+}
+
+.org-form button {
+  background-color: rgb(34, 108, 244);
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.org-form button:hover {
+  background-color: rgb(28, 90, 210);
+}
+
+.org-list {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.org-list th,
+.org-list td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.org-list th {
+  background-color: #f1f5f9;
+  font-weight: 600;
+  color: #334155;
+}

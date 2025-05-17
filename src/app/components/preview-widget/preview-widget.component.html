@@ -1,0 +1,12 @@
+<!-- chatbot-admin/src/app/components/preview-widget/preview-widget.component.html -->
+<div class="preview-wrapper">
+  <h4>Live Preview</h4>
+  <iframe
+    *ngIf="iframeUrl"
+    [src]="iframeUrl"
+    class="preview-frame"
+    frameborder="0"
+    sandbox="allow-scripts allow-same-origin allow-popups"
+  ></iframe>
+  <p *ngIf="!iframeUrl">Select or save a bot to preview styles.</p>
+</div>

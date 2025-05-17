@@ -1,0 +1,68 @@
+<h2>Knowledge Chunks</h2>
+<table *ngIf="items.length">
+  <thead>
+    <tr>
+      <th>Text</th>
+      <th>Source</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of items">
+      <td>{{ item.text | slice:0:100 }}...</td>
+      <td>{{ item.sourceFile }}</td>
+      <td>
+        <button (click)="reprocess(item)">Reprocess</button>
+        <button (click)="delete(item.id)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<input [(ngModel)]="searchTerm" placeholder="Search text...">
+<button (click)="exportChunks()">Export CSV</button>
+<select [(ngModel)]="groupBy">
+  <option value="none">No Grouping</option>
+  <option value="source">Group by Source</option>
+</select>
+
+<div *ngFor="let group of groupedItems">
+  <h3 *ngIf="groupBy !== 'none'">{{ group.key }}</h3>
+  <table *ngIf="group.values.length">
+    <thead>
+      <tr>
+        <th>Text</th>
+        <th>Source</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of group.values">
+        <ng-container *ngIf="item.text.toLowerCase().includes(searchTerm.toLowerCase())">
+          <td>{{ item.text | slice: 0:100 }}...</td>
+          <td>{{ item.sourceFile }}</td>
+          <td>
+            <button (click)="reprocess(item)">Reprocess</button>
+            <button (click)="delete(item.id)">Delete</button>
+          </td>
+        </ng-container>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div style="margin-top: 2rem">
+  <h2>Semantic Search</h2>
+  <input [(ngModel)]="searchTerm" placeholder="Enter search query...">
+  <button (click)="semanticSearch()" [disabled]="!searchTerm || isSearching">Search</button>
+  <button (click)="clearSearch()" *ngIf="searchResults.length">Clear</button>
+
+  <div *ngIf="searchResults.length">
+    <h3>Search Results:</h3>
+    <ul>
+      <li *ngFor="let r of searchResults">
+        <strong>{{ r.sourceFile }}</strong>: {{ r.text | slice:0:200 }}... (score: {{ r.score | number: '1.2-2' }})
+      </li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,61 @@
+<div class="shell">
+    <!-- Topbar -->
+  <header class="topbar">
+    <div class="logo-container" (click)="navigateHome()">
+      <img src="assets/Calimatic_Logo.png" alt="Calimatic Logo">
+    </div>
+    <div class="search-container">
+      <input type="text" placeholder="Search..." />
+    </div>
+    <div class="actions" style="padding-right: 50px;">
+        <i class="fas fa-bell"></i>
+        <div class="profile-menu" (click)="toggleProfileMenu()" [class.open]="profileMenuOpen">
+        <i class="fas fa-user-circle"></i>
+        <div class="profile-dropdown" *ngIf="profileMenuOpen">
+            <a routerLink="/my-account">My Account</a>
+            <a (click)="logout()">Logout</a>
+        </div>
+        </div>
+    </div>
+  </header>
+  <!-- Sidebar -->
+  <aside class="sidebar" [class.collapsed]="isCollapsed">
+    <nav>
+      <a routerLink="/home" routerLinkActive="active">
+        <i class="fas fa-home"></i><span *ngIf="!isCollapsed">Home</span>
+      </a>
+      <a routerLink="/bots" routerLinkActive="active">
+        <i class="fas fa-robot"></i><span *ngIf="!isCollapsed">Bots</span>
+      </a>
+      <a routerLink="/inbox" routerLinkActive="active">
+        <i class="fas fa-envelope"></i><span *ngIf="!isCollapsed">Inbox</span>
+      </a>
+      <a routerLink="/analytics" routerLinkActive="active">
+        <i class="fas fa-chart-bar"></i><span *ngIf="!isCollapsed">Analytics</span>
+      </a>
+      <a routerLink="/organizations" routerLinkActive="active">
+        <i class="fas fa-building"></i><span *ngIf="!isCollapsed">Organizations</span>
+      </a>
+      <a routerLink="/users" routerLinkActive="active">
+        <i class="fas fa-users"></i><span *ngIf="!isCollapsed">Users</span>
+      </a>
+      <a routerLink="/settings" routerLinkActive="active">
+        <i class="fas fa-cog"></i><span *ngIf="!isCollapsed">Settings</span>
+      </a>
+    </nav>
+    <div class="sidebar-toggle" (click)="toggleSidebar()">
+        <span class="material-icons">
+            {{ isCollapsed ? 'chevron_right' : 'chevron_left' }}
+        </span>
+        </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+   
+    <!-- Routed Views -->
+    <section class="content-area">
+      <router-outlet></router-outlet>
+    </section>
+  </main>
+</div>

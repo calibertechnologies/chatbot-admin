@@ -1,0 +1,9 @@
+<form (ngSubmit)="save()">
+    <label>Chatbot Name <input [(ngModel)]="settings.chatbotName" name="chatbotName"></label><br>
+    <label>Avatar URL <input [(ngModel)]="settings.avatarUrl" name="avatarUrl"></label><br>
+    <label>Primary Color <input [(ngModel)]="settings.primaryColor" type="color" name="primaryColor"></label><br>
+    <label>Welcome Message <textarea [(ngModel)]="settings.welcomeMessage" name="welcomeMessage"></textarea></label><br>
+    <label><input [(ngModel)]="settings.enableWebsiteWidget" type="checkbox" name="enableWebsiteWidget"> Enable Website Widget</label><br>
+    <button type="submit">Save</button>
+  </form>
+  
